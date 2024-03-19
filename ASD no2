@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+void koboImaginaryChess(int i, int j, int size, int chessBoard[size][size]) {
+    // Posisi yang mungkin untuk langkah kuda
+    int moves[8][2] = {
+        {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
+        {1, -2}, {1, 2}, {2, -1}, {2, 1}
+    };
+
+    // Cek setiap langkah yang mungkin
+    for (int k = 0; k < 8; k++) {
+        int new_i = i + moves[k][0];
+        int new_j = j + moves[k][1];
+
+        // Pastikan langkah masih dalam papan
+        if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size) {
+            // Set posisi yang dapat dicapai menjadi 1
+            chessBoard[new_i][new_j] = 1;
+        }
+    }
+}
+
+int main() {
+    // Membuat array untuk papan catur
+    int size = 8;
+    int chessBoard[size][size];
+
+    // Inisialisasi papan catur dengan nilai 0
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            chessBoard[i][j] = 0;
+        }
+    }
+
+    // Input posisi kuda
+    int i, j;
+    scanf("%d %d", &i, &j);
+
+    // Panggil fungsi untuk mengisi papan catur dengan posisi yang dapat dicapai oleh kuda
+    koboImaginaryChess(i, j, size, chessBoard);
+
+    // Output hasil
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%d ", chessBoard[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+Hasil:
+2 2
+0 1 0 1 0 0 0 0 
+1 0 0 0 1 0 0 0 
+0 0 0 0 0 0 0 0
+1 0 0 0 1 0 0 0
+0 1 0 1 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+
+
+Penjelasan:
+Dimulai dari Deklarasi untuk memberitahu kompiler tentang tipe dan parameter fungsi.
+lalu koboImaginaryChess menggunakan array 2D.
+Setiap elemen array ini adalah array satu dimensi yang menyimpan perubahan koordinat i dan j untuk setiap langkahnya.
+array dua dimensi dideklarasikan untuk merepresentasikan papan catur dengan ukuran 8x8. 
+Hasil akhir dicetak ke layar dengan menampilkan papan catur yang sudah diisi, di mana angka 1 menunjukkan posisi yang dapat dicapai oleh kuda, dan angka 0 menunjukkan posisi yang tidak dapat dicapai
